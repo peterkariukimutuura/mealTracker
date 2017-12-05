@@ -1,20 +1,72 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+    <h1 style="margin:0px auto;background-color: aliceblue;padding: 10px;
+border-radius: 7px;">Welcome To Meal Tracker</h1>
+  </div>
+  <hr style="border-top: 2px solid rgb(31, 207, 108);">
+  <div class="row">
+    <div class="col-md-4">
+      <h2 class="text-center" style="font-family: 'Fredoka One', cursive;">
+        Add Meal
+      </h2>
+      <small style="color: red; font-weight: bolder;margin-left: 14%;">
+        {{ warning }}
+      </small>
+      <input type="text" placeholder="Meal Name" class="form-control" #newMealname>
+      <br>
+      <input type="text" placeholder="Details" class="form-control" #newDetails>
+      <br>
+      <input type="number" placeholder="Number of Calories" class="form-control" #newCalories>
+      <br>
+      <button class="btn btn-success" (click)="AddnewMeal( newMealname.value, newDetails.value, newCalories.value);
+				newMealname.value='';
+				newDetails.value='';
+				newCalories.value='';
+			 ">
+        Add Meal</button>
 
+    </div>
+    <div class="col-md-8" style="background-color: #ede;">
+
+      <div #firsttemp class="well" style="margin: 10px; background-color: aliceblue;padding: 20px;" *ngFor=" let meal of meals; let i=index; ">
+        <table style=" margin: 0px auto; width: 100%; ">
+          <tr>
+            <td colspan="2" style="width: 20%; text-align: left;">
+              <strong>Meal </strong>
+            </td>
+            <td style="padding-left: 20px;">: {{ meal.name }} </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="width: 20%; text-align: left;">
+              <strong>Description </strong>
+            </td>
+            <td style="padding-left: 20px;"> :{{ meal.description }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="width: 20%; text-align: left;">
+              <strong>Calories </strong>
+            </td>
+            <td style="padding-left: 20px;"> :{{ meal.calorie }}</td>
+          </tr>
+          <tr>
+
+            <td></td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="
+								editmeal(i);
+								">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="delete(i);">Delete</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="!menulist" class="alert alert-danger text-center" style="margin-top:14%; font-weight: bolder;
+				font-family: 'Cabin Sketch', cursive; font-size: 40px;">
+        <p>There are no meals added!</p>
+      </div>
+    </div>
+  </div>
+</div>
